@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tpstreams_player_sdk/tpstreams_player_sdk.dart';
 
 class PlayerWidget extends StatelessWidget {
-  const PlayerWidget({super.key});
+  final String assetId;
+  final String accessToken;
+
+  const PlayerWidget({super.key, required this.assetId, required this.accessToken});
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +14,11 @@ class PlayerWidget extends StatelessWidget {
         leading: const BackButton(),
         title: const Text("Streams Demo"),
       ),
-      body: const Column(
-        children: [TPStreamPlayer(
-                    assetId: '68PAFnYTjSU',
-                    accessToken: '5f3ded52-ace8-487e-809c-10de895872d6')
+      body: Column(
+        children: [
+          TPStreamPlayer(
+              assetId: assetId,
+              accessToken: accessToken)
         ],
       ),
     );

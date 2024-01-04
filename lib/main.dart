@@ -40,7 +40,20 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PlayerWidget()),
+                  MaterialPageRoute(builder: (context) => const PlayerWidget(
+                    assetId: "68PAFnYTjSU",accessToken: "5f3ded52-ace8-487e-809c-10de895872d6",
+                  )),
+                );
+              },
+              child: const Text('Play a DRM Video'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PlayerWidget(
+                    assetId: "peBmzxeQ7Mf",accessToken: "d7ebb4b2-8dee-4dff-bb00-e833195b0756",
+                  )),
                 );
               },
               child: const Text('Play a Video'),
