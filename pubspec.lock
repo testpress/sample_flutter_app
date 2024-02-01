@@ -180,10 +180,10 @@ packages:
     dependency: "direct main"
     description:
       name: tpstreams_player_sdk
-      sha256: ecd44783471475b6e1c0cdd67f458525c39fbeca7d8d49ebad13e7d7c24edccd
+      sha256: b326e8dd24c68bebd4e474aeec3eb689fd6320925aaf939865ad11c3f90ec2c2
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.6"
+    version: "2.0.8"
   vector_math:
     dependency: transitive
     description:
