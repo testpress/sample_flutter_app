@@ -3,7 +3,7 @@ import 'package:tpstreams_player_sdk/tpstreams_player_sdk.dart';
 import './player_widget.dart';
 
 void main() {
-  TPStreamsSDK.initialize(orgCode: "6eafqn");
+  TPStreamsSDK.initialize(orgCode: "4pts73");
 
   runApp(const MyApp());
 }
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => PlayerWidget(
-                    assetId: "68PAFnYTjSU",accessToken: "5f3ded52-ace8-487e-809c-10de895872d6",
+                    assetId: "BUA2jMpDbes",accessToken: "33e345b1-9f22-4382-8c5c-7e49a75d8027",
                   )),
                 );
               },
