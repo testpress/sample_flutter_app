@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tpstreams_player_sdk/tpstreams_player_sdk.dart';
-import './player_widget.dart';
+import 'screens/downloads_screen.dart';
+import 'screens/video_screen.dart';
 
 void main() {
-  TPStreamsSDK.initialize(orgCode: "6eafqn");
+  TPStreamsSDK.initialize(provider: PROVIDER.tpstreams, orgCode: "6eafqn");
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Streams Demo',
+      title: 'TPStreams Player Example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -23,40 +24,70 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final videos = [
+      (
+        title: 'Watch Video 1',
+        assetId: '8eaHZjXt6km',
+        accessToken: '16b608ba-9979-45a0-94fb-b27c1a86b3c1'
+      ),
+      (
+        title: 'Watch Video 2', 
+        assetId: '68PAFnYTjSU',
+        accessToken: '5f3ded52-ace8-487e-809c-10de895872d6'
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Streams Demo"),
+        title: const Text('TPStreams Player Example'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
+            ...videos.map((video) => Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoScreen(
+                        assetId: video.assetId,
+                        accessToken: video.accessToken,
+                        showDownloadOption: true,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(video.title),
+              ),
+            )),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlayerWidget(
-                    assetId: "68PAFnYTjSU",accessToken: "5f3ded52-ace8-487e-809c-10de895872d6",
-                  )),
+                  MaterialPageRoute(
+                    builder: (context) => const DownloadsScreen(),
+                  ),
                 );
               },
-              child: const Text('Play a DRM Video'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PlayerWidget(
-                    assetId: "peBmzxeQ7Mf",accessToken: "d7ebb4b2-8dee-4dff-bb00-e833195b0756",
-                  )),
-                );
-              },
-              child: const Text('Play a Video'),
+              child: const Text('Downloads'),
             ),
           ],
         ),
