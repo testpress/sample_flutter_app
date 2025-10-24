@@ -4,7 +4,7 @@ import 'screens/downloads_screen.dart';
 import 'screens/video_screen.dart';
 
 void main() {
-  TPStreamsSDK.initialize(provider: PROVIDER.tpstreams, orgCode: "6eafqn");
+  TPStreamsSDK.initialize(provider: PROVIDER.tpstreams, orgCode: "9q94nm");
 
   runApp(MyApp());
 }
@@ -41,14 +41,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final videos = [
       (
-        title: 'Watch Video 1',
-        assetId: '8eaHZjXt6km',
-        accessToken: '16b608ba-9979-45a0-94fb-b27c1a86b3c1'
+        title: 'DRM',
+        assetId: '42h2tZ5fmNf',
+        accessToken: '9327e2d0-fa13-4288-902d-840f32cd0eed'
       ),
       (
-        title: 'Watch Video 2', 
-        assetId: '68PAFnYTjSU',
-        accessToken: '5f3ded52-ace8-487e-809c-10de895872d6'
+        title: 'Non-DRM', 
+        assetId: 'BEArYFdaFbt',
+        accessToken: 'e6a1b485-daad-42eb-8cf2-6b6e51631092'
       ),
     ];
 
