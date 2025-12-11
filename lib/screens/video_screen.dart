@@ -5,12 +5,14 @@ class VideoScreen extends StatefulWidget {
   final String assetId;
   final String accessToken;
   final bool showDownloadOption;
+  final Map<String, String>? metadata;
 
   const VideoScreen({
     super.key,
     required this.assetId,
     required this.accessToken,
     this.showDownloadOption = false,
+    this.metadata,
   });
 
   @override
@@ -36,6 +38,7 @@ class _VideoScreenState extends State<VideoScreen> {
               assetId: widget.assetId,
               accessToken: widget.accessToken,
               showDownloadOption: widget.showDownloadOption,
+              metadata: widget.metadata,
               onPlayerCreated: (controller) {
                 _controller = controller;
                 // Listen to player value changes

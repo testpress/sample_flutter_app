@@ -206,6 +206,11 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                     ),
                     const SizedBox(height: 4),
                     _buildStateIndicator(asset.state),
+                    // Display metadata if available
+                    if (asset.metadata != null && asset.metadata!.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      _buildMetadataChips(asset.metadata!),
+                    ],
                   ],
                 ),
               ),
@@ -216,6 +221,37 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
             _buildDownloadProgress(asset),
         ],
       ),
+    );
+  }
+
+  Widget _buildMetadataChips(Map<String, String> metadata) {
+    return Wrap(
+      spacing: 6,
+      runSpacing: 4,
+      children: metadata.entries
+          .map((entry) => Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.blue.withOpacity(0.3),
+                    width: 1,
+                  ),
+                ),
+                child: Text(
+                  '${entry.key}: ${entry.value}',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.blue[700],
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ))
+          .toList(),
     );
   }
 
@@ -236,6 +272,133 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
           color: _getStateColor(state),
           fontWeight: FontWeight.w500,
         ),
+      ),
+    );
+  }
+
+  void _showMetadataInfo(int downloadsWithMetadata) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.label, color: Colors.blue),
+            SizedBox(width: 8),
+            Text('Download Metadata'),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Statistics',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.grey[800],
+                ),
+              ),
+              const SizedBox(height: 8),
+              _buildInfoRow('Total Downloads', '${_downloads.length}'),
+              _buildInfoRow('With Metadata', '$downloadsWithMetadata'),
+              _buildInfoRow('Without Metadata', '${_downloads.length - downloadsWithMetadata}'),
+              const SizedBox(height: 16),
+              Text(
+                'What is Metadata?',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.grey[800],
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Metadata allows you to attach custom information to downloads, such as course ID, module name, or category.',
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'How to Add Metadata',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.grey[800],
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Metadata is set when loading the player in native code (Android/iOS). See METADATA_TESTING.md in the example folder for detailed instructions.',
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue.withOpacity(0.3),
+                  ),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '💡 Tip',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Metadata appears as blue chips below the video title in the downloads list.',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(fontSize: 14),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[700],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -265,10 +428,19 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final downloadsWithMetadata = _downloads.where((d) => 
+      d.metadata != null && d.metadata!.isNotEmpty
+    ).length;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Downloads'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => _showMetadataInfo(downloadsWithMetadata),
+            tooltip: 'Metadata Info',
+          ),
           if (_downloads.isNotEmpty)
             IconButton(
               icon: const Icon(Icons.delete_sweep),

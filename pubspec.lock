@@ -204,10 +204,10 @@ packages:
     dependency: "direct main"
     description:
       name: tpstreams_player_sdk
-      sha256: "92ff295e1d430643bcef10039ab48a6e3245017850350a0b4e0ad6a562c75c48"
+      sha256: "14197972206d373862e863e67721cf38418c4113848bef792ec89857afc11c84"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.6"
+    version: "2.2.6"
   vector_math:
     dependency: transitive
     description:
