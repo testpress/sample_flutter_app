@@ -68,6 +68,7 @@ class _VideoScreenState extends State<VideoScreen> {
                     _downloadManager.startDownload(
                       widget.assetId,
                       widget.accessToken,
+                      widget.metadata,
                     );
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
