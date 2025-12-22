@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -32,9 +33,12 @@ class _LiveChatScreenState extends State<LiveChatScreen> {
           onProgress: (int progress) {},
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
+          onWebResourceError: (WebResourceError error) {
+            debugPrint('Web resource error: ${error.description}');
+          },
           onNavigationRequest: (NavigationRequest request) {
-            return NavigationDecision.navigate;
+            // It's safer to prevent navigation if the webview is self-contained.
+            return NavigationDecision.prevent;
           },
         ),
       );
@@ -62,9 +66,9 @@ class _LiveChatScreenState extends State<LiveChatScreen> {
       window.onload = function() {
         if (window.TPStreamsChat) {
           new TPStreamsChat.load(document.querySelector("#app"), {
-            username : "${widget.username}",
-            roomId: "${widget.roomId}",
-            title: "${widget.title}"
+            username : ${json.encode(widget.username)},
+            roomId: ${json.encode(widget.roomId)},
+            title: ${json.encode(widget.title)}
           });
         }
       };
