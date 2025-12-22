@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tpstreams_player_sdk/tpstreams_player_sdk.dart';
 import 'screens/downloads_screen.dart';
 import 'screens/video_screen.dart';
+import 'screens/live_chat_screen.dart';
 
 void main() {
   TPStreamsSDK.initialize(provider: PROVIDER.tpstreams, orgCode: "9q94nm");
@@ -100,6 +101,22 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               child: const Text('Downloads'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LiveChatScreen(
+                      username: "Flutter user",
+                      roomId: "93b76b94-c9a5-42df-a0af-c196cff1103c",
+                      title: "Flutter Live Chat",
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Live Chat'),
             ),
           ],
         ),
