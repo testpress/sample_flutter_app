@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
         title: 'DRM',
         assetId: '42h2tZ5fmNf',
         accessToken: '9327e2d0-fa13-4288-902d-840f32cd0eed',
+        startInFullscreen: false,
         metadata: {
           'course_id': 'flutter-100',
           'module': 'drm-video',
@@ -56,6 +57,18 @@ class _HomePageState extends State<HomePage> {
         title: 'Non-DRM', 
         assetId: 'BEArYFdaFbt',
         accessToken: 'e6a1b485-daad-42eb-8cf2-6b6e51631092',
+        startInFullscreen: false,
+        metadata: {
+          'course_id': 'flutter-101',
+          'module': 'non-drm-video',
+          'lecture_id': 'lecture-1002',
+        },
+      ),
+      (
+        title: 'Launch in Fullscreen', 
+        assetId: 'BEArYFdaFbt',
+        accessToken: 'e6a1b485-daad-42eb-8cf2-6b6e51631092',
+        startInFullscreen: true,
         metadata: {
           'course_id': 'flutter-101',
           'module': 'non-drm-video',
@@ -83,6 +96,7 @@ class _HomePageState extends State<HomePage> {
                         assetId: video.assetId,
                         accessToken: video.accessToken,
                         showDownloadOption: true,
+                        startInFullscreen: video.startInFullscreen,
                         metadata: video.metadata,
                       ),
                     ),

@@ -5,6 +5,7 @@ class VideoScreen extends StatefulWidget {
   final String assetId;
   final String accessToken;
   final bool showDownloadOption;
+  final bool startInFullscreen;
   final Map<String, String>? metadata;
 
   const VideoScreen({
@@ -12,6 +13,7 @@ class VideoScreen extends StatefulWidget {
     required this.assetId,
     required this.accessToken,
     this.showDownloadOption = false,
+    this.startInFullscreen = false,
     this.metadata,
   });
 
@@ -38,6 +40,7 @@ class _VideoScreenState extends State<VideoScreen> {
               assetId: widget.assetId,
               accessToken: widget.accessToken,
               showDownloadOption: widget.showDownloadOption,
+              startInFullscreen: widget.startInFullscreen,
               metadata: widget.metadata,
               onPlayerCreated: (controller) {
                 _controller = controller;
