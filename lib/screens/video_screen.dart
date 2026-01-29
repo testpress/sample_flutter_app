@@ -53,6 +53,11 @@ class _VideoScreenState extends State<VideoScreen> {
                 };
                 // Listen to player value changes
                 _controller.addListener(_onPlayerValueChanged);
+
+                _controller.onAccessTokenExpired = (String videoId) async {
+                  String newToken = "5fa9d056-9a59-424c-ada1-2e08f75050e2"; // await getNewToken();
+                  return newToken;
+                };
               },
             ),
           ),
