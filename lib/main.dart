@@ -98,6 +98,14 @@ class _HomePageState extends State<HomePage> {
                         showDownloadOption: true,
                         startInFullscreen: video.startInFullscreen,
                         metadata: video.metadata,
+                        preferences: TPStreamsPlayerPreferences(
+                          enableFullscreen: false,
+                          enablePlaybackSpeed: false,
+                          enableCaptions: false,
+                          showResolutionOptions: false,
+                          enableSeekButtons: false,
+                          seekBarColor: Colors.yellow.value,
+                        ),
                       ),
                     ),
                   );
