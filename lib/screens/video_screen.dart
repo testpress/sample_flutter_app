@@ -6,6 +6,7 @@ class VideoScreen extends StatefulWidget {
   final String accessToken;
   final bool showDownloadOption;
   final bool startInFullscreen;
+  final bool autoPlay;
   final Map<String, String>? metadata;
 
   const VideoScreen({
@@ -14,6 +15,7 @@ class VideoScreen extends StatefulWidget {
     required this.accessToken,
     this.showDownloadOption = false,
     this.startInFullscreen = false,
+    this.autoPlay = true,
     this.metadata,
     this.preferences,
   });
@@ -43,6 +45,7 @@ class _VideoScreenState extends State<VideoScreen> {
               assetId: widget.assetId,
               accessToken: widget.accessToken,
               showDownloadOption: widget.showDownloadOption,
+              autoPlay: widget.autoPlay,
               startInFullscreen: widget.startInFullscreen,
               metadata: widget.metadata,
               preferences: widget.preferences,
@@ -54,6 +57,10 @@ class _VideoScreenState extends State<VideoScreen> {
 
                 _controller.onBeforeFullScreenExit = () {
                   print('Will exit fullscreen');
+                };
+
+                _controller.onReplay = () {
+                  print('Replay is clicked');
                 };
                 // Listen to player value changes
                 _controller.addListener(_onPlayerValueChanged);

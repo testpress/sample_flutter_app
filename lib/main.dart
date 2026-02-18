@@ -97,6 +97,7 @@ class _HomePageState extends State<HomePage> {
                         accessToken: video.accessToken,
                         showDownloadOption: true,
                         startInFullscreen: video.startInFullscreen,
+                        autoPlay: true,
                         metadata: video.metadata,
                         preferences: TPStreamsPlayerPreferences(
                           enableFullscreen: false,
