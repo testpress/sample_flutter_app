@@ -51,6 +51,7 @@ class _VideoScreenState extends State<VideoScreen> {
               preferences: widget.preferences,
               onPlayerCreated: (controller) {
                 _controller = controller;
+                _controller.setMaxResolution(240);
                 _controller.onBeforeFullScreenEnter = () {
                   print('Will enter fullscreen');
                 };

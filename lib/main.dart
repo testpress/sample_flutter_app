@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                           enableFullscreen: false,
                           enablePlaybackSpeed: false,
                           enableCaptions: false,
-                          showResolutionOptions: false,
+                          showResolutionOptions: true,
                           enableSeekButtons: false,
                           seekBarColor: Colors.yellow.value,
                         ),
